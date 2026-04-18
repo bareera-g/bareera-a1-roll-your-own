@@ -38,6 +38,19 @@ class Button extends Widget{
         this.update();
     }
 
+    set size(dim: {width: number; height: number}){
+        this.height = dim.height;
+        this.width = dim.width;
+        this.update();
+    }
+
+    get size(): {width: number; height: number}{
+        return {
+            width: this.width,
+            height: this.height
+        }:
+    }
+
     private positionText(){
         let box:Box = this._text.bbox();
         // in TS, the prepending with + performs a type conversion from string to number
@@ -93,33 +106,33 @@ class Button extends Widget{
     //widget
     idleupState(): void {
         this.backcolor= "#B3E5FC";
-        this._rect.fill(this._backcolor);
+        this._rect.fill(this.backcolor);
     }
     idledownState(): void {
         this.backcolor= "#4FC3F7";
-        this._rect.fill(this._backcolor);
+        this._rect.fill(this.backcolor);
     }
     pressedState(): void {
         this.backcolor= "#29B6F6";
-        this._rect.fill(this._backcolor);
+        this._rect.fill(this.backcolor);
     }
     hoverState(): void {
         this.backcolor= "#81D4FA";
-        this._rect.fill(this._backcolor);
+        this._rect.fill(this.backcolor);
     }
     hoverPressedState(): void {
         this.backcolor= "#0288D1";
-        this._rect.fill(this._backcolor);
+        this._rect.fill(this.backcolor);
     }
     pressedoutState(): void {
         this.backcolor= "#4FC3F7";
-        this._rect.fill(this._backcolor);
+        this._rect.fill(this.backcolor);
     }
     moveState(): void {
-        throw new Error("Method not implemented.");
+        
     }
     keyupState(keyEvent?: KeyboardEvent): void {
-        throw new Error("Method not implemented.");
+       
     }
 }
 

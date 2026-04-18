@@ -12,6 +12,8 @@ lbl1.fontSize = 16;
 lbl1.move(10,20);
 
 let btn = new Button(w);
+btn.label = "Click me";
+btn.size = {width : 200, height: 50};
 btn.tabindex = 2;
 btn.fontSize = 14
 btn.move(12, 50)
