@@ -84,7 +84,9 @@ class Button extends Widget{
     }
 
     //TODO: implement the onClick event using a callback passed as a parameter
-    onClick(/*TODO: add callback parameter*/):void{}
+    onClick(callback: (event: EventArgs) => void):void{
+        this.attach(callback);
+    }
 
     
     //TODO: give the states something to do! Use these methods to control the visual appearance of your
