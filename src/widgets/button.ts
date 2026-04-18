@@ -82,14 +82,27 @@ class Button extends Widget{
         if(this._text != null)
             this._text.font('size', this._fontSize);
             this._text.text(this._input);
+            this._text.text(this._input);
             this.positionText();
 
         if(this._rect != null)
             this._rect.fill(this.backcolor);
+            this._rect.width(this.width);
+            this._rect.height(this.height);
+            
         
         super.update();
     }
     
+    set label(text: string){
+        this._input = text;
+        this.update();
+    }
+
+    get label(): string{
+        return this._input;
+    }
+
     pressReleaseState(): void{
 
         if (this.previousState instanceof PressedWidgetState)

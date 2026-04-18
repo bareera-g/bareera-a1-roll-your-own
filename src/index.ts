@@ -17,3 +17,4 @@ btn.size = {width : 200, height: 50};
 btn.tabindex = 2;
 btn.fontSize = 14
 btn.move(12, 50)
+btn.onClick(() => {lbl1.text= "Button Clicked";});
