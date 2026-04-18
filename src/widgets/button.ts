@@ -92,22 +92,28 @@ class Button extends Widget{
     //TODO: give the states something to do! Use these methods to control the visual appearance of your
     //widget
     idleupState(): void {
-        throw new Error("Method not implemented.");
+        this.backcolor= "#B3E5FC";
+        this._rect.fill(this._backcolor);
     }
     idledownState(): void {
-        throw new Error("Method not implemented.");
+        this.backcolor= "#4FC3F7";
+        this._rect.fill(this._backcolor);
     }
     pressedState(): void {
-        throw new Error("Method not implemented.");
+        this.backcolor= "#29B6F6";
+        this._rect.fill(this._backcolor);
     }
     hoverState(): void {
-        throw new Error("Method not implemented.");
+        this.backcolor= "#81D4FA";
+        this._rect.fill(this._backcolor);
     }
     hoverPressedState(): void {
-        throw new Error("Method not implemented.");
+        this.backcolor= "#0288D1";
+        this._rect.fill(this._backcolor);
     }
     pressedoutState(): void {
-        throw new Error("Method not implemented.");
+        this.backcolor= "#4FC3F7";
+        this._rect.fill(this._backcolor);
     }
     moveState(): void {
         throw new Error("Method not implemented.");
