@@ -14,12 +14,9 @@ class ScrollBar extends Widget{
     private _scrollHeight: number;
     private _thumbPosition = 0;
 
-    private _widthValue: number = 50;
-    private _buttonSize: number = 20;
-    private _thumbHeight: number = 35;
-
-    private _width: number;
-    private _height: number;
+    private _widthValue: number = 30;
+    private _buttonSize: number = 30;
+    private _thumbHeight: number = 40;
 
     public onScroll?: (position: number, direction: string) => void;
 
@@ -28,15 +25,14 @@ class ScrollBar extends Widget{
         super(parent);
         // set defaults
         this._scrollHeight = height;
-        this._width = this._widthValue;
-        this._height = height;
+        this.width = this._widthValue;
+        this.height = height;
 
         // set Aria role
         this.role = RoleType.scrollbar;
         this.setState(new IdleUpWidgetState());
         //TODO:
         // set default state!
-        this.setState(new IdleUpWidgetState());
         // render widget
         this.render();
     }
@@ -47,11 +43,11 @@ class ScrollBar extends Widget{
         this.outerSvg = this._group;
         // Add a transparent rect on top of text to prevent selection cursor
         this._upButton = this._group.rect(this._widthValue, this._buttonSize).move(0,0).fill("#e5e7eb");
-        this._upArrow = this._group.text("↑").move(8,5).font({size: 14});
+        this._upArrow = this._group.text("↑").move(9,2).font({size: 18});
         this._track = this._group.rect(4, this._scrollHeight - 2 * this._buttonSize).move(13, this._buttonSize).fill("#cbd5e1").radius(2);
-        this._thumb = this._group.rect(18, this.thumbPosition).move(6, this._buttonSize).fill("#64748b").radius(8);
+        this._thumb = this._group.rect(18, this._thumbHeight).move(6, this._buttonSize).fill("#64748b").radius(8);
         this._downButton = this._group.rect(this._widthValue, this._buttonSize).move(0, this._scrollHeight - this._buttonSize).fill("#e5e7eb");
-        this._downArrow = this._group.text("↓").move(8, this._scrollHeight - this._buttonSize + 5);
+        this._downArrow = this._group.text("↓").move(9, this._scrollHeight - this._buttonSize + 2).font({size: 18});
         this._upButton.mouseup(() => this.moveThumb(-10));
         this._upArrow.mouseup(() => this.moveThumb(-10));
 
@@ -66,7 +62,7 @@ class ScrollBar extends Widget{
         // register objects that should receive event notifications.
         // for this widget, we want to know when the group or rect objects
         // receive events
-        this.registerEvent(this.outerSvg);
+        // this.registerEvent(this.outerSvg);
     }
 
     get thumbPosition(): number {
@@ -76,7 +72,6 @@ class ScrollBar extends Widget{
     set scrollHeight(height: number){
         this._scrollHeight = height;
         this.height = height;
-        this.render();
     }
 
     private setThumbPosition(position: number){
@@ -85,8 +80,10 @@ class ScrollBar extends Widget{
         if (position < 0) position = 0;
         if (position > max) position = max;
 
+        let change = position - this._thumbPosition;
+
         this._thumbPosition = position;
-        this._thumb.move(6, this._buttonSize + this._thumbPosition);
+        this._thumb.dy(change);
 
     }
 
@@ -120,16 +117,15 @@ class ScrollBar extends Widget{
     idledownState(): void {
     }
     pressedState(): void {
+
     }
     pressReleaseState(): void {
     }
     hoverState(): void {
-        this._thumb.fill("#475569");
     }
     hoverPressedState(): void {
     }
     pressedoutState(): void {
-        this._thumb.fill("#64748b");
     }
     moveState(): void {
     }

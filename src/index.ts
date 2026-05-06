@@ -41,15 +41,15 @@ radiobutton.onChange = (index: number, label: string) => {
 };
 
 
-let scrollbar = new ScrollBar(w, 100);
-scrollbar.move(12, 300);
+let scrollbar = new ScrollBar(w, 180);
+scrollbar.move(25, 300);
 scrollbar.onScroll = (position: number, direction: string ) => {
     console.log("Scrollbar moved:", direction, position);
-    lbl1.text = "Scroll" + direction + ":" + position;
+    lbl1.text = "Scroll " + direction + ": " + position;
 }
 
 
-let toggle = new Switch(w, "Dark mode");
+let toggle = new Switch(w, "Toggle");
 toggle.move(350, 50);
 
 toggle.onChange = (on: boolean) => {
