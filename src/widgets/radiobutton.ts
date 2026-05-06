@@ -11,7 +11,7 @@ class RadioButton extends Widget{
     private _options: string[];
     private _selectedIndex: number = 0;
 
-    private defaultWidth: number = 100;
+    private defaultWidth: number = 180;
     private optionHeight: number = 30;
 
     public onChange?: (selectedIndex: number, selectedLabel: string) => void;
@@ -40,7 +40,7 @@ class RadioButton extends Widget{
         // Set the outer svg element 
         this.outerSvg = this._group;
         // Add a transparent rect on top of text to prevent selection cursor
-        this._group.rect(this.width, this.height).opacity(0).attr('id', 0);
+        // this._group.rect(this.width, this.height).opacity(0).attr('id', 0);
         for (let i = 0; i < this._options.length; i++){
             this.createOption(i);
         }
@@ -49,20 +49,26 @@ class RadioButton extends Widget{
         // for this widget, we want to know when the group or rect objects
         // receive events
         this.updateVisuals();
-        this.registerEvent(this.outerSvg);
+        // this.registerEvent(this.outerSvg);
     }
 
     private createOption(index: number): void {
         let y = index * this.optionHeight;
         let optionGroup = this._group.group();
-        optionGroup.rect(this.width, this.optionHeight).move(0,y).opacity(0);
-        let circle = optionGroup.circle(18).move(4, y + 5).fill("white").stroke({color: "black", width:2 });
-        let dot = optionGroup.circle(10).move(8, y+9).fill("black").hide();
-        let label = optionGroup.text(this._options[index]).move(35, y+3).font({size: 16});
-        optionGroup.mouseup(() => {this.select(index)});
+
+
+        let hitArea = optionGroup.rect(this.width, this.optionHeight).move(0,y).fill("white").opacity(0);
+        let circle = optionGroup.circle(18).move(4,y+ 5).fill("white").stroke({ color: "black", width:2 });
+    
+
+        let label = optionGroup.text(this._options[index]).move(35, y + 3).font({size: 16});
+
+        hitArea.mouseup(() => this.select(index));
+        circle.mouseup(() => this.select(index));
+        label.mouseup(() => this.select(index));
+       
         this._optionGroups.push(optionGroup);
         this._circleOptions.push(circle);
-        this._checkedin.push(dot);
         this._labels.push(label);
     }
 
@@ -76,12 +82,10 @@ class RadioButton extends Widget{
     }
 
     private updateVisuals(): void {
-        for (let i = 0; i < this._checkedin.length; i++){
+        for (let i = 0; i < this._circleOptions.length; i++){
             if (i === this._selectedIndex){
-                this._checkedin[i].show();
                 this._circleOptions[i].fill("#dff7e8");
             } else {
-                this._checkedin[i].hide();
                 this._circleOptions[i].fill("white");
             }
         }

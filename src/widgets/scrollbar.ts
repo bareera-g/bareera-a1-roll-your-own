@@ -27,7 +27,7 @@ class ScrollBar extends Widget{
     constructor(parent:Window, height: number = 220){
         super(parent);
         // set defaults
-        this._scrollHeight = this.height;
+        this._scrollHeight = height;
         this._width = this._widthValue;
         this._height = height;
 
@@ -46,17 +46,17 @@ class ScrollBar extends Widget{
         // Set the outer svg element 
         this.outerSvg = this._group;
         // Add a transparent rect on top of text to prevent selection cursor
-        this._upButton = this._group.rect(this._widthValue, this.buttonSize).move(0,0).fill("#e5e7eb");
+        this._upButton = this._group.rect(this._widthValue, this._buttonSize).move(0,0).fill("#e5e7eb");
         this._upArrow = this._group.text("↑").move(8,5).font({size: 14});
-        this._track = this._group.rect(4, this._scrollHeight - 2 * this.buttonSize).move(13, this.buttonSize).fill("#cbd5e1").radius(2);
-        this._thumb = this._group.rect(18, this.thumbHeight).move(6, this.buttonSize).fill("#64748b").radius(8);
-        this._downButton = this._group.rect(this._widthValue, this.buttonSize), move(0, this._scrollHeight - this.buttonSize).fill("#e5e7eb");
+        this._track = this._group.rect(4, this._scrollHeight - 2 * this._buttonSize).move(13, this._buttonSize).fill("#cbd5e1").radius(2);
+        this._thumb = this._group.rect(18, this.thumbPosition).move(6, this._buttonSize).fill("#64748b").radius(8);
+        this._downButton = this._group.rect(this._widthValue, this._buttonSize).move(0, this._scrollHeight - this._buttonSize).fill("#e5e7eb");
         this._downArrow = this._group.text("↓").move(8, this._scrollHeight - this._buttonSize + 5);
         this._upButton.mouseup(() => this.moveThumb(-10));
         this._upArrow.mouseup(() => this.moveThumb(-10));
 
-        this._downButton.mouseup(() => this.moveThumb(-10));
-        this._downArrow.mouseup(() => this.moveThumb(-10));
+        this._downButton.mouseup(() => this.moveThumb(10));
+        this._downArrow.mouseup(() => this.moveThumb(10));
 
         this._track.mouseup((event:any) => {
             this.jumpThumb(event.offsetY);
@@ -70,7 +70,7 @@ class ScrollBar extends Widget{
     }
 
     get thumbPosition(): number {
-        return this.thumbPosition;
+        return this._thumbPosition;
     }
 
     set scrollHeight(height: number){

@@ -3,6 +3,8 @@ import {Button} from "./widgets/button"
 import {Heading} from "./widgets/heading"
 import {Checkbox} from "./widgets/checkbox"
 import { RadioButton } from "./widgets/radiobutton";
+import { ScrollBar } from "./widgets/scrollbar";
+import { Switch } from "./widgets/switch";
 
 let w = new Window(window.innerHeight-10,'100%');
 
@@ -38,3 +40,19 @@ radiobutton.onChange = (index: number, label: string) => {
     lbl1.text = "Selected: " + label;
 };
 
+
+let scrollbar = new ScrollBar(w, 100);
+scrollbar.move(12, 300);
+scrollbar.onScroll = (position: number, direction: string ) => {
+    console.log("Scrollbar moved:", direction, position);
+    lbl1.text = "Scroll" + direction + ":" + position;
+}
+
+
+let toggle = new Switch(w, "Dark mode");
+toggle.move(350, 50);
+
+toggle.onChange = (on: boolean) => {
+    console.log("Toggle:", on);
+    lbl1.text = on ? "Toggle On" : "Toggle Off";
+};
