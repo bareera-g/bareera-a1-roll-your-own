@@ -48,7 +48,7 @@ class Button extends Widget{
         return {
             width: this.width,
             height: this.height
-        }:
+        };
     }
 
     private positionText(){
@@ -79,17 +79,16 @@ class Button extends Widget{
     }
 
     override update(): void {
-        if(this._text != null)
+        if(this._text != null){
             this._text.font('size', this._fontSize);
             this._text.text(this._input);
-            this._text.text(this._input);
             this.positionText();
-
-        if(this._rect != null)
+        }
+        if(this._rect != null){
             this._rect.fill(this.backcolor);
             this._rect.width(this.width);
             this._rect.height(this.height);
-            
+        }
         
         super.update();
     }
